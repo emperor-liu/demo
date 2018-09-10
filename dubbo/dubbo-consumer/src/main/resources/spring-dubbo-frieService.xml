@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
-       xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xmlns:dubbo="http://dubbo.apache.org/schema/dubbo" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
        http://dubbo.apache.org/schema/dubbo 
        http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
- 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
 				<value>classpath:application.properties</value>
 			</list>
 		</property>
 	</bean>
+
+	<!-- consumer's application name, used for tracing dependency relationship 
+		(not a matching criterion), don't set it same as provider -->
+	<dubbo:application name="demo-consumer" />
 	
-    <!-- consumer's application name, used for tracing dependency relationship (not a matching criterion),
-    don't set it same as provider -->
-    <dubbo:application name="demo-consumer"/>
+	<!-- <dubbo:provider loadbalance="customize" /> -->
+	
+	<!-- use multicast registry center to discover service -->
+	<dubbo:registry address="zookeeper://${zookeeper.host}" />
 
-    <!-- use multicast registry center to discover service -->
-    <dubbo:registry address="zookeeper://${zookeeper.host}"/>
+	<!-- generate proxy for the remote service, then demoService can be used 
+		in the same way as the local regular interface -->
+	<dubbo:reference id="fireService" check="false"
+		interface="com.lljqiu.demo.dubbo.service.FireMonitorService"
+		loadbalance="customize" />
 
-    <!-- generate proxy for the remote service, then demoService can be used in the same way as the
-    local regular interface -->
-    <dubbo:reference id="fireService" check="false" interface="com.lljqiu.demo.dubbo.service.FireMonitorService"/>
+	<!-- 多注册中心 通过registry 来确认服务在那个注册中心 -->
+	<!-- <dubbo:registry id="dubbodemo" address="zookeeper://localhost:2181"/> 
+		<dubbo:reference registry="dubbodemo" id="fireService" check="false" interface="com.lljqiu.demo.dubbo.service.FireMonitorService"/> -->
 
 </beans>

@@ -32,7 +32,7 @@ public class ConsumerApplication {
 	
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(ConsumerApplication.class, args);
-        JSONObject json = new JSONObject();
+		JSONObject json = new JSONObject();
         json.put("device", "123123");
         if(fireService == null){
         	ClassPathXmlApplicationContext context = 
@@ -42,6 +42,9 @@ public class ConsumerApplication {
         }
         JSONObject invokeFireMonitorServer = fireService.invokeFireMonitorServer(json);
         System.out.println(invokeFireMonitorServer.toJSONString());
+		
+		System.in.read();
+        
 	}
 
 }

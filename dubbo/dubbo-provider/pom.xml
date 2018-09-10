@@ -26,10 +26,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>dubbo</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.lljqiu.demo</groupId>
 			<artifactId>dubbo-service</artifactId>
 		</dependency>

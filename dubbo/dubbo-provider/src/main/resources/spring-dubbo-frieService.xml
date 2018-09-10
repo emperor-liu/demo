@@ -22,11 +22,23 @@
 
     <!-- use dubbo protocol to export service on port 20880 -->
     <dubbo:protocol name="dubbo" port="20880"/>
+    
+    <dubbo:provider loadbalance="customize" />
 
     <!-- service implementation, as same as regular local bean -->
     <bean id="fireService" class="com.lljqiu.demo.dubbo.provider.service.FireServiceImpl"/>
 
     <!-- declare the service interface to be exported -->
-    <dubbo:service interface="com.lljqiu.demo.dubbo.service.FireMonitorService" ref="fireService"/>
+    <dubbo:service 
+    	interface="com.lljqiu.demo.dubbo.service.FireMonitorService" 
+    	loadbalance="customize"
+    	ref="fireService"/>
+    
+    <!-- 指定注册中心 可以不同的服务注册到不同中心 具体使用请看消费部分的代码-->
+    <!-- <dubbo:registry id="dubbodemo" address="zookeeper://localhost:2181"/>
+    <bean id="demoService" class="com.lljqiu.demo.dubbo.provider.service.DemoServiceImpl"/>
+    <dubbo:service registry="dubbodemo" interface="com.lljqiu.demo.dubbo.provider.service.DemoService" ref="demoService"/> -->
+    
+    
 
 </beans>

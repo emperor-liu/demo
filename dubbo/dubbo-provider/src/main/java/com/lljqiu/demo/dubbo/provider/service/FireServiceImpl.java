@@ -36,6 +36,8 @@ public class FireServiceImpl implements FireMonitorService {
 		JSONObject json = new JSONObject();
 		json.put("success", "code");
 		json.put("getLocalAddress", RpcContext.getContext().getLocalAddress());
+		// 根据参数拼接 shell
+		// 调用 C++
 		return (T) json;
 	}
 
