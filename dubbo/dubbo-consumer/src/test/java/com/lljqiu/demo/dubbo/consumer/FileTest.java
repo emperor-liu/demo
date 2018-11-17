@@ -27,27 +27,27 @@ import java.util.Set;
 public class FileTest {
 	
 	public static void main(String[] args) throws Exception {
-//		String filePath = "/Users/liujie/Desktop/uploadDeviceId.log";
-//		File file = new File(filePath);
-//		BufferedReader reader = new BufferedReader(new FileReader(file));
-//		String tempString = null;
-//		System.out.println("开始时间="+new Date().getTime());
-//        Set<String> set = new HashSet<String>();
-//        while ((tempString = reader.readLine()) != null) {
-//        	
-//        	int statusIndex = tempString.indexOf("status");
-//        	String statusOk = tempString.substring(statusIndex+7, statusIndex+9);
-//        	if("ok".equalsIgnoreCase(statusOk)){
-//        		int indexOf = tempString.indexOf("deviceId");
-//            	set.add(tempString.substring(indexOf+9, indexOf+29));
-//        	}
-//        	
-//        }
-//        reader.close();
-//        System.out.println("结束时间="+new Date().getTime());
-//        System.out.println(set.size());
+		String filePath = "/Users/liujie/Desktop/uploadDeviceId.log";
+		File file = new File(filePath);
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String tempString = null;
+		System.out.println("开始时间="+new Date().getTime());
+        Set<String> set = new HashSet<String>();
+        while ((tempString = reader.readLine()) != null) {
+        	
+        	int statusIndex = tempString.indexOf("status");
+        	String statusOk = tempString.substring(statusIndex+7, statusIndex+9);
+        	if("ok".equalsIgnoreCase(statusOk)){
+        		int indexOf = tempString.indexOf("deviceId");
+            	set.add(tempString.substring(indexOf+9, indexOf+29));
+        	}
+        	
+        }
+        reader.close();
+        System.out.println("结束时间="+new Date().getTime());
+        System.out.println(set);
         
-        diffFileDevice();
+//        diffFileDevice();
 
 
 	}
