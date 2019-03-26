@@ -6,7 +6,7 @@
  * Create by name：liujie -- email: jie_liu1@asdc.com.cn
  * Copyright © 2015, 2018, www.asdc.com.cn. All rights reserved.
  */
-package com.lljqiu.demo.file;
+package com.lljqiu.demo.file.utils;
 
 import java.io.*;
 import java.util.ArrayList;

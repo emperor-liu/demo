@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <script src="../js/jquery-2.1.4.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../hxs-form-validator.js"></script>
+<body>
+    <h4 class="modal-title" id="addroleLabel"> 测试 </h4>
+    <div class="modal-body">
+    <form id="addOrUpdateForm" class="form-horizontal form-label-left" novalidate>
+        <input type="hidden" name="id">
+        <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userAccount">用户名 <span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" class="form-control col-md-7 col-xs-12" name="userAccount" id="userAccount" required="required" placeholder="请输入账号"/>
+            </div>
+        </div>
+        <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">密码 <span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="password" class="form-control col-md-7 col-xs-12" maxlength="20" minlength="6" id="password" name="password" required="required" placeholder="请输入密码 6位以上"/>
+            </div>
+        </div>
+        <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="passwordRepeat">重复密码 <span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="password" class="form-control col-md-7 col-xs-12" validate-repeat="password" maxlength="20" minlength="6" id="passwordRepeat" name="passwordRepeat" required="required" placeholder="请输入密码 6位以上"/>
+            </div>
+        </div>
+        <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userName">昵称 <span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" class="form-control col-md-7 col-xs-12" name="userName" id="userName" required="required" placeholder="请输入昵称"/>
+            </div>
+        </div>
+        <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userPhone">手机 </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="tel" class="form-control col-md-7 col-xs-12" name="userPhone" id="userPhone" placeholder="请输入手机号"/>
+            </div>
+        </div>
+        <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userEmail">邮箱 </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="email" class="form-control col-md-7 col-xs-12" name="userEmail" id="userEmail" placeholder="请输入邮箱"/>
+            </div>
+        </div>
+        <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="qq">QQ </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="number" class="form-control col-md-7 col-xs-12" name="qq" id="qq" placeholder="请输入QQ"/>
+            </div>
+        </div>
+        <button type="button" class="btn btn-success addOrUpdateBtn" onclick="testSub()"><i class="fa fa-save"> 保存</i></button>
+
+    </form>
+    </div>
+</body>
+</html>
+
+
+<script type="text/javascript">
+    // required  - form 提交前必须校验
+    // validate-repeat="password"  用于判断两个输入一致性
+    // min 最小值
+    // max 最大值
+    // minlength 最小长度
+    // maxlength 最大长度
+    // pattern  自定义的正则校验
+    //  settings={messages:{required:'test'},rules:{number:/^\d+$/}}
+    //new FormUtils(settings);  可以传递参数
+    function testSub(){
+        var $form = $("#addOrUpdateForm");
+        var validatorUtils = new FormUtils();
+        var result = validatorUtils.validator($form);
+        console.info(result);
+        if(result){
+            console.info("submit");
+        }
+    }
+
+</script>
