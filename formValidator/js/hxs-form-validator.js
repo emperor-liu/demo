@@ -25,7 +25,7 @@
 
     FormUtils.prototype = {
         defaults : {
-            errorElement: "label", // 
+            errorElement: "label", //
             errorClass : "alert alert-danger", // bootstrap.min.css 有样式
             messages : {
                 required        : "请输入有效数据",
@@ -54,7 +54,7 @@
                 complete        : '输入不完整',
                 select          : '必选项',
                 time            : '请输入正确的时间',
-                default         : ''
+                error           : ''
             },
             rules : {
                 email   : {
@@ -71,9 +71,9 @@
             }
         },
         /**
-        * 方法校验定义
-        * 定义不同 type 的校验逻辑
-        */
+         * 方法校验定义
+         * 定义不同 type 的校验逻辑
+         */
         methods : {
             url:function(field, data){
                 if( !this.settings.rules.url.test(data.val) )
@@ -89,12 +89,12 @@
                 return true;
             },
             text:function(field, data ){
-                var that = this;
+                let that = this;
                 let dateLength = data.val ? data.val.length : 0;
                 // if(data.type != "password"){
-                    if(dateLength === 0){
-                        return this.errorMessage.required;
-                    }
+                if(dateLength === 0){
+                    return this.errorMessage.required;
+                }
                 // }
                 if( data.minlength && dateLength < data.minlength ){
                     return this.errorMessage.minlength.replace("{0}",data.minlength);
@@ -103,11 +103,11 @@
                 if( data.maxlength && dateLength > data.maxlength ){
                     return this.errorMessage.maxlength.replace("{0}",data.maxlength);
                 }
-                
-                
+
+
                 // 自定义正则
                 if( data.pattern ){
-                    var regex, jsRegex;
+                    let regex, jsRegex;
 
                     switch( data.pattern ){
                         case 'alphanumeric' :
@@ -125,12 +125,12 @@
                     try{
                         jsRegex = new RegExp(regex).test(data.val);
                         if( data.val && !jsRegex ){
-                            return this.texts.invalid;
+                            return this.errorMessage.invalid;
                         }
                     }
                     catch(err){
                         console.warn(err, field, 'regex is invalid');
-                        return this.texts.invalid;
+                        return this.errorMessage.invalid;
                     }
                 }
 
@@ -146,7 +146,7 @@
                 if(!this.settings.rules.number.test( data.val )){
                     return this.errorMessage.number;
                 }
-                
+
                 // 校验最大值
                 if( data.max && a > data.max ){
                     return this.errorMessage.max.replace("{0}",data.max);
@@ -168,23 +168,23 @@
                 return true;
             },
             date:function(field, data ){
-                if( !this.settings.rules.date.test(new Date(data.val)) ){
+                if( !this.settings.rules.date.test(new Date(data.val).toString()) ){
                     return this.errorMessage.date;
                 }
                 return true;
             },
             dateISO:function(field, data ){
-                 if( !this.settings.rules.dateISO.test(new Date(data.val)) ){
+                if( !this.settings.rules.dateISO.test(data.val)){
                     return this.errorMessage.dateISO;
                 }
                 return true;
             },
             time:function(field, data ){
                 if( !this.settings.rules.time.test(data.val) ){
-                   return this.errorMessage.time;
+                    return this.errorMessage.time;
                 }
                 return true;
-                    
+
             },
             select:function(field, data ){
                 return data.val ? true : this.errorMessage.select;
@@ -197,7 +197,7 @@
                     return this.errorMessage.required;
                 }
                 if( b != a ){
-                    return this.errorMessage[type + 'Repeat'] || this.errorMessage.default;
+                    return this.errorMessage[type + 'Repeat'] || this.errorMessage.error;
                 }
                 return true;
             },
@@ -207,11 +207,11 @@
 
         },
         /**
-        * 根据 input type 校验
-        */
+         * 根据 input type 校验
+         */
         check: function(field,data){
             data = $.extend({}, data);
-            var type = data.type;
+            let type = data.type;
             if( type == 'tel' )
                 data.pattern = data.pattern || 'phone';
             if( !type || type == 'password' || type == 'tel' || type == 'search' || type == 'file' )
@@ -220,20 +220,20 @@
             return this.methods[type] ? this.methods[type].call(this, field, data) : true;
         },
         /**
-        * 显示错误信息
-        */
+         * 显示错误信息
+         */
         showError:function(field, errorData ){
-            var errLable = $("#"+field.id+"-error");
+            let errLable = $("#"+field.id+"-error");
             if(errLable.length>0){
                 errLable.html(errorData || "");
             }else{
-                var errorHtml = $("<" + this.settings.errorElement + ">").attr("id", field.id + "-error").attr("style","width:100%;padding:0;margin-bottom:0").addClass(this.settings.errorClass).html(errorData || "")
+                let errorHtml = $("<" + this.settings.errorElement + ">").attr("id", field.id + "-error").attr("style","width:100%;padding:0;margin-bottom:0").addClass(this.settings.errorClass).html(errorData || "")
                 $(field).after(errorHtml);
             }
-            
+
         },
         destroy:function(field){
-            var errLable = $("#"+field.id+"-error");
+            let errLable = $("#"+field.id+"-error");
             if(errLable.length>0){
                 errLable.removeClass(this.settings.errorClass);
                 errLable.html("");
@@ -241,14 +241,14 @@
 
         },
         /**
-        * 初始化当前 input 参数， 获取 input 类型，以及用户输入值，
-        */
+         * 初始化当前 input 参数， 获取 input 类型，以及用户输入值，
+         */
         prepareFieldData:function(field){
             // let field = $(el);
             let nodeName = field.nodeName.toLowerCase()
             this.data.valid = true;
-            this.data.type = field.getAttribute('type'); 
-            this.data.val = field.value.replace(/^\s+|\s+$/g, ""); 
+            this.data.type = field.getAttribute('type');
+            this.data.val = field.value.replace(/^\s+|\s+$/g, "");
             this.data.pattern = field.getAttribute('pattern');
             if( nodeName === "select" ){
                 this.data.type = 'select';
@@ -279,10 +279,10 @@
                 return true;
             }
             this.prepareFieldData(field);
-            
+
             // 检查该字段是否有特定的错误消息，如果没有，请使用默认的“无效”消息
-            errorMessage = this.errorMessage[field.name] || this.errorMessage.invalid;
-            
+            let errorMessage = this.errorMessage[field.name] || this.errorMessage.invalid;
+
             // 校验字段值不为空
             this.result.valid = this.methods.isNull.call(this,this.data.val);
             let optional = $(field).hasClass('optional');
@@ -294,29 +294,29 @@
                 errorMessage = this.check.call(this,field, this.data);
                 this.result.valid = errorMessage === true ? true : false;
             }
-             // 校验重复输入功能
+            // 校验重复输入功能
             if( this.data.valid && this.data.validateRepeat ){
-                var linkedTo = this.data['validateRepeat'].indexOf('#') == 0 ? $(this.data['validateRepeat']) : $(':input[name=' + this.data['validateRepeat'] + ']');
+                let linkedTo = this.data['validateRepeat'].indexOf('#') == 0 ? $(this.data['validateRepeat']) : $(':input[name=' + this.data['validateRepeat'] + ']');
                 errorMessage = this.methods.equalTo.call(this, this.data.val, linkedTo.val() ,this.data.type);
                 this.result.valid = errorMessage === true ? true : false;
             }
 
-            this[this.result.valid ? "destroy" : "showError"]( field, errorMessage ); 
+            this[this.result.valid ? "destroy" : "showError"]( field, errorMessage );
             return {
                 valid : this.result.valid,
                 error : this.result.valid === true ? "" : errorMessage
             }
         },
         /**
-        * 获取需要校验的input
-        */
+         * 获取需要校验的input
+         */
         filterFormElements : function( fields ){
-            var i,
+            let i,
                 fieldsToCheck = [];
-                
+
 
             for( i = fields.length; i--; ) {
-                var isAllowedElement = fields[i].nodeName.match(/input|textarea|select/gi),
+                let isAllowedElement = fields[i].nodeName.match(/input|textarea|select/gi),
                     isRequiredAttirb = fields[i].hasAttribute('required'),
                     isDisabled = fields[i].hasAttribute('disabled'),
                     isOptional = fields[i].className.indexOf('optional') != -1;
@@ -328,12 +328,12 @@
             return fieldsToCheck;
         },
         /**
-        * 添加 绑定事件 用于修改 input 的时候触发
-        */
+         * 添加 绑定事件 用于修改 input 的时候触发
+         */
         bindEvent : function(from){
-            var that = this;
+            let that = this;
 
-            var types = ['blur', 'input', 'change'];
+            let types = ['blur', 'input', 'change'];
 
             if( !from || !types ) return;
 
@@ -350,7 +350,7 @@
         },
         validator : function(form){
             let $form = $(form),
-            that = this;
+                that = this;
             this.bindEvent($form[0]);
             if( $form.length == 0 ){
                 console.warn('element not found');
