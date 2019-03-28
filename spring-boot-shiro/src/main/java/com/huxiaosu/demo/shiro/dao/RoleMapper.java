@@ -8,8 +8,8 @@
  */
 package com.huxiaosu.demo.shiro.dao;
 
-import com.huxiaosu.demo.security.model.Role;
-import com.huxiaosu.demo.security.model.User;
+import com.huxiaosu.demo.shiro.model.Role;
+import com.huxiaosu.demo.shiro.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
