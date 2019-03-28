@@ -6,7 +6,7 @@
  * Create by name：liujie -- email: liujie@huxiaosu.com
  * Copyright © 2015, 2018, www.huxiaosu.com. All rights reserved.
  */
-package com.huxiaosu.demo.shiro.model;
+package com.huxiaosu.demo.security.model;
 
 import lombok.Data;
 

@@ -1,12 +1,12 @@
 /**
  * Project Name demo
  * File Name RoleMapper
- * Package Name com.huxiaosu.demo.shiro.dao
+ * Package Name com.huxiaosu.demo.security.dao
  * Create Time 2019/3/28
  * Create by name：liujie -- email: liujie@huxiaosu.com
  * Copyright © 2015, 2018, www.huxiaosu.com. All rights reserved.
  */
-package com.huxiaosu.demo.shiro.dao;
+package com.huxiaosu.demo.security.dao;
 
 import com.huxiaosu.demo.security.model.Role;
 import com.huxiaosu.demo.security.model.User;

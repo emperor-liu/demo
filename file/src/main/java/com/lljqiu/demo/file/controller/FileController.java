@@ -3,7 +3,7 @@
  * File Name FileController
  * Package Name com.lljqiu.demo.file.controller
  * Create Time 2018/11/17
- * Create by name：liujie -- email: jie_liu1@asdc.com.cn
+ * Create by name：liujie -- email: liujie@huxiaosu.com
  * Copyright © 2015, 2018, www.asdc.com.cn. All rights reserved.
  */
 package com.lljqiu.demo.file.controller;
