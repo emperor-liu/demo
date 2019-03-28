@@ -9,7 +9,7 @@
     </parent>
 
 
-    <groupId>com.lljqiu.demo</groupId>
+    <groupId>com.huxiaosu.demo</groupId>
     <artifactId>demo</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
@@ -21,6 +21,8 @@
         <module>dubbo</module>
         <module>rabbitmq</module>
         <module>file</module>
+        <module>spring-boot-shiro</module>
+        <module>spring-boot-security</module>
     </modules>
 
     <properties>
