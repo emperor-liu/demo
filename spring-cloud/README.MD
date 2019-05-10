@@ -13,5 +13,7 @@
 
 | 模块  | 作用 | 备注 |
 | :------------: | :------------: | :------------: |
-| spring-cloud-config-server | 配置中心 |  |
-| spring-cloud-eureka-server | spring cloud 注册中心 |  |
+| spring-cloud-config-server | 配置中心 | 所有模块从这里读取各模块配置文件 |
+| spring-cloud-eureka-server | spring cloud 注册中心 | 所有模块多需要向这里注册 |
+| spring-cloud-service-one | 第一个模块 |  |
+| spring-cloud-service-two | 第二个模块 |  |
