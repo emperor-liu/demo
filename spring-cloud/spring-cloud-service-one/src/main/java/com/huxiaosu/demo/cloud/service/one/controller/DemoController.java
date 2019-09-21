@@ -24,14 +24,14 @@ import javax.validation.Valid;
  */
 @RestController
 public class DemoController {
-
-    @Value("${test}")
-    String serviceOne;
-
-    @GetMapping("/test")
-    @ResponseBody
-    public String test() {
-
-        return serviceOne+"-DemoController";
-    }
+//
+//    @Value("${test}")
+//    String serviceOne;
+//
+//    @GetMapping("/test")
+//    @ResponseBody
+//    public String test() {
+//
+//        return serviceOne+"-DemoController";
+//    }
 }
