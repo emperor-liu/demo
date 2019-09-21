@@ -16,14 +16,16 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  * Description
  *      采用 JPA 链接只需要创建  demo 数据库即可
  *      在数据库里面 添加一些测试数据
- * @ClassName: ShiroApp
- * @author: liujie
- * @date: 2019/3/27 11:14
+ * @ClassName ShiroApp
+ * @author liujie
+ * @date 2019/3/27 11:14
  */
 @SpringBootApplication
 @ServletComponentScan
 public class ShiroApp {
+
     public static void main(String[] args) throws Exception {
+
         SpringApplication.run(ShiroApp.class, args);
 
     }
